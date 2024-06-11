@@ -1,0 +1,34 @@
+{
+    "users": [
+        {
+            "First Name": "Ali",
+            "Last Name": "Abid",
+            "Email Address": "aliabid0207@gmail.com",
+            "Phone Number": "6473006645",
+            "Address": "16 Harry blaylock dr",
+            "Postal Code": "L6E1W7",
+            "Username": "Username",
+            "Password": "Password12$"
+        },
+        {
+            "First Name": "Bob",
+            "Last Name": "Joe",
+            "Email Address": "bhss@gmail.com",
+            "Phone Number": "1234567890",
+            "Address": "100 Donal Sim Ave",
+            "Postal Code": "L5K1W3",
+            "Username": "Username1",
+            "Password": "Password12$"
+        },
+        {
+            "First Name": "f",
+            "Last Name": "g",
+            "Email Address": "edfe@gmail.com",
+            "Phone Number": "416-358-9566",
+            "Address": "16 chant crescent",
+            "Postal Code": "L6B 0A3",
+            "Username": "f",
+            "Password": "Username*8"
+        }
+    ]
+}
