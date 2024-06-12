@@ -446,7 +446,7 @@ class DashBoard(QtWidgets.QFrame):
         self.data = data
         self.header = QtWidgets.QLabel(f"Welcome, {self.data.get("First Name")} {self.data.get("Last Name")}!", alignment=QtCore.Qt.AlignCenter)
         self.user_calender = QtWidgets.QPushButton("View Appointments")
-        self.user_bookings = QtWidgets.QPushButton("Book and Appointment")
+        self.user_bookings = QtWidgets.QPushButton("Book an Appointment")
         self.log_out = QtWidgets.QPushButton("Log Out")
         self.settings = QtWidgets.QPushButton("Settings")
 
@@ -873,6 +873,14 @@ class Symptoms(QtWidgets.QFrame):
         # Set the layout of the frame
         self.layout = QtWidgets.QVBoxLayout(self)
 
+        self.scroll_area = QtWidgets.QScrollArea()
+        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.scroll_area.setWidgetResizable(True)
+
+        self.central_widget = QtWidgets.QWidget()
+        self.qvbox = QtWidgets.QVBoxLayout()
+
         # Prepare all the ckeckboxes
         self.symptom_list = readFileJSON("symptoms.json")
         self.data = data
@@ -899,9 +907,13 @@ class Symptoms(QtWidgets.QFrame):
 
         # Add all checkboxes to the main frame
         for i in self.checkbox_list:
-            self.layout.addWidget(list(i.keys())[0])
+            self.qvbox.addWidget(list(i.keys())[0])
             for j in i[list(i.keys())[0]]:
-                self.layout.addWidget(j)
+                self.qvbox.addWidget(j)
+
+        self.central_widget.setLayout(self.qvbox)
+        self.scroll_area.setWidget(self.central_widget)
+        self.layout.addWidget(self.scroll_area)
         self.layout.addWidget(self.back_btn)
 
         # Make button do stuff
