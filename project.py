@@ -20,11 +20,11 @@ def deleteApointmentJSON(appointment: list, username: str):
 """
 Function to write appointment data to a JSON file
 """
-def writeFileJSON_Appointment(appointment: dict, username: str):
+def writeFileJSON_Appointment(appointment: list, username: str):
     with open('appointments.json', 'r+') as file:
         appointments = json.load(file)
         if username in appointments:
-            appointments[username].append(appointment)
+            appointments[username] = appointment
         else:
             appointments[username] = [appointment]
         file.seek(0)
@@ -67,28 +67,6 @@ def writeFileJSON(data: dict, file = "data.json"):
     with open(file, 'w', encoding='utf-8') as f:
         obj = json.dumps(d, ensure_ascii=False, indent=4)
         f.write(obj)
-
-"""
-Reads a given CSV file
-"""
-def readFileCSV(file_name = "symptoms.csv"):
-    data = []
-    with open(file_name, 'r+') as csvfile:
-        csv_reader = csv.reader(csvfile)
-        return list(csv_reader)
-
-"""
-Write data to a given CSV file
-"""
-def writeFileCSV(data: dict, file = "symptoms.csv"):
-    # Get all the previous data in the CSV file
-    d = readFileCSV(file)
-    # Add the new data to the old data
-    d.append(data)
-    # Write "d" to the CSV file
-    with open(file, 'w') as f:
-        csv_writer = csv.writer(f)
-        csv_writer.writerows(d)
 
 """
 The main window of the program; all widgets will be displayed on this window
@@ -855,6 +833,7 @@ class Booking(QtWidgets.QFrame):
     """
     def mergeAppointments(self, appointment: dict, username: str):
         appointments = readFileJSON_Appointment(username)
+        merged = False
         if not appointments:
             appointments = appointment
             return appointments
@@ -863,21 +842,25 @@ class Booking(QtWidgets.QFrame):
             if appointment["Date"]==appointments[i]["Date"]:
                 # Merge the reasons together
                 appointments[i]["Reasons"] = list(set(appointments[i]["Reasons"]+appointment["Reasons"]))
+                merged = True
                 break
+        if not merged:
+            appointments.append(appointment)
         return appointments
     
     """
     Get the severity of the appointment
     """
     def getSeverity(self, appointment: dict):
-        symptom_severity = readFileCSV()
+        symptom_severity = readFileJSON("symptoms.json")
         highest_severity = 0
         # Go through all the reasons the user has listed, and if the severity associated 
         # with the symptom is higher than the current highest, change the sevrity
         for i in appointment["Reasons"]:
             for j in symptom_severity:
-                temp = j[1] if j[0]==i else 0
-            highest_severity = temp if temp>highest_severity else highest_severity
+                for k in symptom_severity[j]:
+                    temp = k[list(k.keys())[0]] if list(k.keys())[0]==i else 0
+                    highest_severity = temp if temp>highest_severity else highest_severity
         return highest_severity
 
 """
@@ -891,27 +874,34 @@ class Symptoms(QtWidgets.QFrame):
         self.layout = QtWidgets.QVBoxLayout(self)
 
         # Prepare all the ckeckboxes
-        self.symptom_list = readFileCSV()
-        self.symptom_list.pop(0)
+        self.symptom_list = readFileJSON("symptoms.json")
         self.data = data
         self.parent_data = parent_data
-        self.checkbox_list = [QtWidgets.QCheckBox(i[0].capitalize(), self) for i in self.symptom_list]
+        self.checkbox_list = []
+        for i in self.symptom_list:
+            temp = []
+            for j in self.symptom_list[i]:
+                temp.append(QtWidgets.QCheckBox(list(j.keys())[0].capitalize()))
+            self.checkbox_list.append({QtWidgets.QLabel(i.upper()): temp})
         self.back_btn = QtWidgets.QPushButton("Back")
 
         # Get previous user inputs
         if symptoms_selected:
             for i in symptoms_selected:
                 for j in self.checkbox_list:
-                    try:
-                        if i==j.text():
-                            j.setChecked(True)
-                            break
-                    except:
-                        pass
+                    for k in j[list(j.keys())[0]]:
+                        try:
+                            if i==k.text().lower():
+                                k.setChecked(True)
+                                break
+                        except:
+                            pass
 
         # Add all checkboxes to the main frame
         for i in self.checkbox_list:
-            self.layout.addWidget(i)
+            self.layout.addWidget(list(i.keys())[0])
+            for j in i[list(i.keys())[0]]:
+                self.layout.addWidget(j)
         self.layout.addWidget(self.back_btn)
 
         # Make button do stuff
@@ -938,8 +928,9 @@ class Symptoms(QtWidgets.QFrame):
     def getChecked(self):
         checked = []
         for i in self.checkbox_list:
-            if i.isChecked():
-                checked.append(i.text())
+            for j in i[list(i.keys())[0]]:
+                if j.isChecked():
+                    checked.append(j.text().lower())
         return checked
         
 """
@@ -1144,7 +1135,9 @@ class Edit(QtWidgets.QFrame):
 
             # Delete the old appointment and replace with the new appointment
             deleteApointmentJSON(self.appointment, self.data["Username"])
-            writeFileJSON_Appointment(new_appointment, self.data["Username"])
+            temp = readFileJSON_Appointment(self.data["Username"])
+            temp.append(new_appointment)
+            writeFileJSON_Appointment(temp, self.data["Username"])
 
             # Change the main frame
             appointment_view = ViewAppointments(self.data)

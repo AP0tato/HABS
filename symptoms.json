@@ -1,0 +1,39 @@
+{
+    "severe symptoms": [
+        {"severe chest pain": 10},
+        {"uncosnciousness": 10},
+        {"difficulty breathing": 10},
+        {"severe abdominal pain": 10}
+    ],
+
+    "general symptoms": [
+        {"continuous Fever": 6},
+        {"rash": 3},
+        {"coughing blood": 8},
+        {"continous nose bleeds": 6},
+        {"hearing loss": 4}
+    ],
+    "gastrointestinal symptoms": [
+        {"nausea": 4},
+        {"vomiting": 5},
+        {"diarrhea": 4},
+        {"consiptation": 3},
+        {"unexplained weight loss or gain": 6}
+    ],
+    "neurological symptoms": [
+        {"constant headaches": 6},
+        {"seizures": 8},
+        {"dizziness": 4}
+    ],
+    "musculoskeletal symptoms": [
+        {"joint pain": 4},
+        {"muscle pain": 4},
+        {"back pain": 5},
+        {"dislocated bone": 7}
+    ],
+    "other symptoms": [
+        {"morning sickness": 3},
+        {"pelvic pain": 7},
+        {"testicular pain": 8}
+    ]
+}
