@@ -2,6 +2,10 @@ QFrame {
     background: rgb(52, 52, 52);
 }
 
+QWidget {
+    background: rgb(52, 52, 52);
+}
+
 QLabel {
     color: white;
 }

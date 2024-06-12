@@ -5,10 +5,6 @@ QLabel {
     border-radius: 3px;
 }
 
-QWidget {
-    background-color: rgb(52, 52, 52);
-}
-
 QPushButton {
     border-radius: 3px;
     color: white;
