@@ -889,7 +889,7 @@ class Symptoms(QtWidgets.QFrame):
         self.layout = QtWidgets.QVBoxLayout(self)
 
         self.scroll_area = QtWidgets.QScrollArea()
-        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.scroll_area.setWidgetResizable(True)
 
