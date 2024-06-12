@@ -7,6 +7,13 @@ from calendar import monthrange
 from PySide6 import QtCore, QtWidgets
 
 """
+Read qss file
+"""
+def readQSS(file: str):
+    with open(file, 'r') as f:
+        return f.read()
+
+"""
 Deletes an appointment from JSON file
 """
 def deleteApointmentJSON(appointment: list, username: str):
@@ -77,6 +84,8 @@ class Window(QtWidgets.QMainWindow):
     """
     def __init__(self):
         super().__init__()
+        # Styling the pages
+        self.setStyleSheet(readQSS("main.qss"))
         # Set window title
         self.setWindowTitle("HABS")
         # Set window size
