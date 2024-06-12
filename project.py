@@ -1001,9 +1001,12 @@ class ViewAppointments(QtWidgets.QFrame):
     """
     def loadAppointments(self):
         appointments = readFileJSON_Appointment(self.data["Username"])
-        for appointment in appointments:
-            item = QtWidgets.QListWidgetItem(f"Date: {appointment['Date']}, Time: {appointment['Time']}, Reasons: {appointment['Reasons']}")
-            self.appointments.addItem(item)
+        if appointments:
+            for appointment in appointments:
+                item = QtWidgets.QListWidgetItem(f"Date: {appointment['Date']}, Time: {appointment['Time']}, Reasons: {appointment['Reasons']}")
+                self.appointments.addItem(item)
+        else:
+            self.appointments = []
 
     """
     Shows the user's appointments in the form of a calendar
