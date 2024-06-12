@@ -1,3 +1,7 @@
+# Ali Abid, Felix Gao, Aryan Rathore
+# June 13 2024
+# THE HABS program (Hospital Appointment Booking System)
+
 import sys
 import json
 import csv
