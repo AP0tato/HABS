@@ -1,6 +1,8 @@
 QLabel {
-    background-color: rgb(52, 52, 52);
+    background: rgb(52, 52, 52);
     color: white;
+    min-height: 30px;
+    border-radius: 3px;
 }
 
 QWidget {
@@ -8,7 +10,7 @@ QWidget {
 }
 
 QPushButton {
-    border-radius: 2pt;
+    border-radius: 3px;
     color: white;
     background: rgb(82, 82, 82);
 }

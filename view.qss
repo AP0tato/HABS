@@ -1,0 +1,9 @@
+QListWidget {
+    background: rgb(52, 52, 52);
+    color: white;
+}
+
+QListWidgetItem {
+    background: rgb(52, 52, 52);
+    color: white;
+}

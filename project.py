@@ -637,6 +637,8 @@ class Month(QtWidgets.QWidget):
         appointments = ViewAppointments(self.data)
         # Set the current frame to the previous month
         self.parent().setCentralWidget(appointments)
+        # Resize window
+        self.parent().resize(800, 400)
         # Destroy current window
         self.destroy(destroySubWindows=True)
         # Delete object to prevent memory leaks
@@ -962,6 +964,8 @@ Displays all the user's appointments
 class ViewAppointments(QtWidgets.QFrame):
     def __init__(self, data: dict):
         super().__init__()
+
+        self.setStyleSheet(readQSS("view.qss"))
 
         # Variables and elements
         self.data = data

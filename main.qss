@@ -5,3 +5,20 @@ QFrame {
 QLabel {
     color: white;
 }
+
+QPushButton {
+    background: rgb(82, 82, 82);
+    border-radius: 3px;
+    color: white;
+    min-height: 20px;
+}
+
+QPushButton:hover {
+    background: rgb(62, 62, 62);
+}
+
+QLineEdit {
+    color: white;
+    background: rgb(22, 22, 22);
+    min-height: 20px;
+}
