@@ -534,6 +534,8 @@ class Month(QtWidgets.QWidget):
     def __init__(self, date: str, data: dict):
         super().__init__()
 
+        self.setStyleSheet(readQSS("calender.qss"))
+
         # Set the layout of the widget
         self.layout = QtWidgets.QGridLayout(self)
 
@@ -1101,12 +1103,12 @@ class Edit(QtWidgets.QFrame):
         
         # Fill the text edits with the appointment details
         if parent_data:
-            self.date = QtWidgets.QLineEdit(parent_data[0])
-            self.time = QtWidgets.QLineEdit(parent_data[1])
+            self.date = QtWidgets.QLineEdit(parent_data[0], placeholderText="Date (YY-MM-DD)")
+            self.time = QtWidgets.QLineEdit(parent_data[1], placeholderText="Time (HH:MM)")
             self.symptoms_selected = symptoms
         else:
-            self.date = QtWidgets.QLineEdit(self.appointment["Date"])
-            self.time = QtWidgets.QLineEdit(self.appointment["Time"])
+            self.date = QtWidgets.QLineEdit(self.appointment["Date"], placeholderText="Date (YY-MM-DD)")
+            self.time = QtWidgets.QLineEdit(self.appointment["Time"], placeholderText="Time (HH:MM)")
 
         if symptoms:
             self.symptoms_selected = symptoms

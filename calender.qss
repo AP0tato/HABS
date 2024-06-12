@@ -1,0 +1,18 @@
+QLabel {
+    background-color: rgb(52, 52, 52);
+    color: white;
+}
+
+QWidget {
+    background: rgb(52, 52, 52);
+}
+
+QPushButton {
+    border-radius: 2pt;
+    color: white;
+    background: rgb(82, 82, 82);
+}
+
+QPushButton:hover {
+    background: rgb(62, 62, 62);
+}
