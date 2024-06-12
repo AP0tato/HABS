@@ -885,7 +885,7 @@ class Symptoms(QtWidgets.QFrame):
 
         self.setStyleSheet(readQSS("symptoms.qss"))
 
-        # Set the layout of the frame
+        # Set the layout of the frame and make it scrollable
         self.layout = QtWidgets.QVBoxLayout(self)
 
         self.scroll_area = QtWidgets.QScrollArea()
