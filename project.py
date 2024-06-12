@@ -883,6 +883,8 @@ class Symptoms(QtWidgets.QFrame):
     def __init__(self, data: dict, parent_data: list, symptoms_selected: list):
         super().__init__()
 
+        self.setStyleSheet(readQSS("symptoms.qss"))
+
         # Set the layout of the frame
         self.layout = QtWidgets.QVBoxLayout(self)
 

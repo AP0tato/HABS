@@ -6,7 +6,7 @@ QLabel {
 }
 
 QWidget {
-    background: rgb(52, 52, 52);
+    background-color: rgb(52, 52, 52);
 }
 
 QPushButton {
